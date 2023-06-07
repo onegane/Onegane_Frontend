@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import * as S from "../../style/index";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <Container>
       <HeaderDivider>
-        <MainIcon src="assets/header/mainIcon.svg" alt="" />
-        <ShortLink>택배 조회</ShortLink>
-        <ShortLink>택배 등록</ShortLink>
+        <Link to="/">
+          <MainIcon src="assets/header/mainIcon.svg" alt=""></MainIcon>
+        </Link>
+
+        <ShortLink to="/view">택배 조회</ShortLink>
+        <ShortLink to="/register">택배 등록</ShortLink>
       </HeaderDivider>
       <HeaderDivider>
         <RegisterBtn usage="login">로그인</RegisterBtn>
@@ -52,13 +56,16 @@ const MainIcon = styled.img`
   cursor: pointer;
 `;
 
-const ShortLink = styled.div`
+const ShortLink = styled(Link)`
   width: max-content;
 
   text-align: center;
   cursor: pointer;
   transition-timing-function: ease-out;
   transition-duration: 0.2s;
+
+  text-decoration: none;
+  color: ${S.headerStyle.text2};
 
   :hover {
     color: ${S.headerStyle.text1};
