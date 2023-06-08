@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <C.Header />
       <BrowserRouter>
+        <C.Header />
         <Routes>
           <Route path="/" element={<P.RendingPage />}></Route>
           <Route path="/view" element={<P.ViewPage />}></Route>
