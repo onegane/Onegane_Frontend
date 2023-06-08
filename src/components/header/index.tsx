@@ -64,24 +64,6 @@ const MainIcon = styled.img`
   cursor: pointer;
 `;
 
-const AnimateUnderLine = keyframes`
-  from {
-    width: 0%;
-    height: 2px;
-    position: absolute;
-
-    background-color: ${S.headerStyle.text3};
-  }
-
-  to {
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    
-    background-color: ${S.headerStyle.text1};
-  }
-`;
-
 const UnderLine = styled.div`
   border-radius: 1px;
 `;
@@ -106,10 +88,6 @@ const ShortLink = styled(Link)<{ location: string; to: string }>`
 
   :hover {
     color: ${S.headerStyle.text1};
-    ${UnderLine} {
-      animation: ${AnimateUnderLine} 0.5s forwards;
-      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
   }
 `;
 
