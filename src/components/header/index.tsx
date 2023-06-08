@@ -1,16 +1,25 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import * as S from "../../style/index";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  let CurrentLocation = useLocation().pathname;
+
   return (
     <Container>
       <HeaderDivider>
         <Link to="/">
           <MainIcon src="assets/header/mainIcon.svg" alt=""></MainIcon>
         </Link>
-        <ShortLink to="/view">택배 조회</ShortLink>
-        <ShortLink to="/register">택배 등록</ShortLink>
+        <ShortLink to="/view" location={CurrentLocation}>
+          택배 조회
+          <UnderLine />
+        </ShortLink>
+        <ShortLink to="/register" location={CurrentLocation}>
+          택배 등록
+          <UnderLine />
+        </ShortLink>
       </HeaderDivider>
       <HeaderDivider>
         <RegisterBtn usage="login">로그인</RegisterBtn>
@@ -55,8 +64,36 @@ const MainIcon = styled.img`
   cursor: pointer;
 `;
 
-const ShortLink = styled(Link)`
-  width: max-content;
+const AnimateUnderLine = keyframes`
+  from {
+    width: 0%;
+    height: 2px;
+    position: absolute;
+
+    background-color: ${S.headerStyle.text3};
+  }
+
+  to {
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    
+    background-color: ${S.headerStyle.text1};
+  }
+`;
+
+const UnderLine = styled.div`
+  border-radius: 1px;
+`;
+
+const ShortLink = styled(Link)<{ location: string; to: string }>`
+  width: 80px;
+  height: min-content;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
 
   text-align: center;
   cursor: pointer;
@@ -64,10 +101,15 @@ const ShortLink = styled(Link)`
   transition-duration: 0.2s;
 
   text-decoration: none;
-  color: ${S.headerStyle.text2};
+  color: ${(props) =>
+    props.location === props.to ? S.headerStyle.text1 : S.headerStyle.text2};
 
   :hover {
     color: ${S.headerStyle.text1};
+    ${UnderLine} {
+      animation: ${AnimateUnderLine} 0.5s forwards;
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
   }
 `;
 

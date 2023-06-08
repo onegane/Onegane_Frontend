@@ -1,11 +1,7 @@
 import * as C from "../../components/index";
 
 const Register = () => {
-  return (
-    <>
-      <C.Header />
-    </>
-  );
+  return <></>;
 };
 
 export default Register;
