@@ -9,7 +9,6 @@ const Header = () => {
         <Link to="/">
           <MainIcon src="assets/header/mainIcon.svg" alt=""></MainIcon>
         </Link>
-
         <ShortLink to="/view">택배 조회</ShortLink>
         <ShortLink to="/register">택배 등록</ShortLink>
       </HeaderDivider>
