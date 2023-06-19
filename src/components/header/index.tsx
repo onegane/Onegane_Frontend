@@ -22,7 +22,7 @@ const Header = () => {
         </ShortLink>
       </HeaderDivider>
       <HeaderDivider>
-        <RegisterBtn usage="login">로그인?</RegisterBtn>
+        <RegisterBtn usage="login">로그인</RegisterBtn>
         <RegisterBtn usage="signup">회원가입</RegisterBtn>
       </HeaderDivider>
     </Container>
