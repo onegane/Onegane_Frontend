@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import * as S from "../../style/index";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -31,7 +31,7 @@ const Header = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 78px;
+  height: 4.5rem;
 
   position: absolute;
 
