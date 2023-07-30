@@ -2,15 +2,19 @@ import styled from "styled-components";
 import * as C from "../../components/index";
 import * as S from "../../style";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Register = () => {
   const [packageNumber, setPackageNumber] = useState("");
-  const submit = useRef<HTMLButtonElement>(null);
+  const submit = useRef<HTMLInputElement>(null);
 
-  const CheckInput = (content: string, element: HTMLButtonElement) => {
+  useEffect(() => {
+    console.log(packageNumber);
+  }, [packageNumber]);
+
+  const CheckInput = (content: string, element: HTMLInputElement) => {
     content === ""
-      ? (element.style.border = "2px solid red")
+      ? (element.style.border = "2px solid #ff8b8b")
       : (element.style.border = "2px solid #D2D2D2");
   };
 
@@ -26,9 +30,12 @@ const Register = () => {
           <ShowIcon imgLink="assets/register/step3.svg" />
         </ShowRegisterProgress>
         <WriteRegisterInfo>
-          <C.BaseInput onChange={setPackageNumber} placeholder="운송장 번호를 입력해주세요!" />
-          <SubmitButton
+          <C.BaseInput
             ref={submit}
+            onChange={setPackageNumber}
+            placeholder="운송장 번호를 입력해주세요!"
+          />
+          <SubmitButton
             onClick={() => CheckInput(packageNumber, submit.current!)}
           >
             택배 등록하기

@@ -1,12 +1,27 @@
+import { Dispatch, ForwardedRef, forwardRef, SetStateAction, useRef } from "react";
 import styled from "styled-components";
 
-const Input = (props: { placeholder: string }) => {
-  return <Title placeholder={props.placeholder} />;
-};
+const Input = forwardRef(
+  (
+    props: { placeholder: string; onChange: Dispatch<SetStateAction<string>> },
+    submit: ForwardedRef<HTMLInputElement>
+  ) => {
+    return (
+      <BaseInput
+        onChange={(e) => {
+          props.onChange(e.target.value);
+          console.log("히히 값저장됨 ㅋ");
+        }}
+        placeholder={props.placeholder}
+        ref={submit}
+      />
+    );
+  }
+);
 
 export default Input;
 
-const Title = styled.input`
+const BaseInput = styled.input`
   width: 30rem;
   height: 3rem;
 
