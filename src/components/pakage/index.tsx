@@ -11,7 +11,6 @@ const PackageDesc = () => {
     "도착일",
     "수령일",
     "운송장번호",
-    "승인",
     "삭제",
   ].map((data) => {
     return <div style={{ color: "#808080", fontSize: "1.125rem" }}>{data}</div>;
@@ -32,7 +31,6 @@ const PackageDesc = () => {
             <Sdate>2023.03.23</Sdate>
             <Gdate>-</Gdate>
             <Pid>612698465196519124</Pid>
-            <Approv> - </Approv>
             <Del>X</Del>
           </>
         );
@@ -50,7 +48,7 @@ const Container = styled.div`
   position: relative;
 
   display: grid;
-  grid-template-columns: repeat(9, minmax(3.075rem, max-content));
+  grid-template-columns: repeat(8, minmax(3.075rem, max-content));
   grid-gap: 2rem;
 
   font-size: 1rem;

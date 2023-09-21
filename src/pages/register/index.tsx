@@ -49,7 +49,7 @@ const Register = () => {
 export default Register;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 
   padding-top: 4.5rem;
@@ -86,8 +86,8 @@ const ShowIcon = styled.div<{ imgLink: string }>`
 `;
 
 const WriteRegisterInfo = styled.div`
-  width: max-content;
-  height: max-content;
+  width: fit-content;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;

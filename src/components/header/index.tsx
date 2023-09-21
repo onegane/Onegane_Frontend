@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import * as S from "../../style/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { UserData } from "../../state";
 
 const Header = () => {
   let CurrentLocation = useLocation().pathname;
+  let userData = useRecoilValue(UserData);
 
   return (
     <Container>
@@ -22,22 +25,24 @@ const Header = () => {
         </ShortLink>
       </HeaderDivider>
       <HeaderDivider>
-        <RegisterBtn usage="login">로그인</RegisterBtn>
-        <RegisterBtn usage="signup">회원가입</RegisterBtn>
+        {!userData && (
+          <a href="https://auth.bssm.kro.kr/oauth?clientId=d674a77d&redirectURI=http://localhost:3000/redirect">
+            <RegisterBtn>로그인</RegisterBtn>
+          </a>
+        )}
       </HeaderDivider>
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 4.5rem;
 
-  position: absolute;
+  position: fixed;
 
   display: flex;
-  gap: 30%;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 
   background-color: ${S.headerStyle.bg};
@@ -46,11 +51,15 @@ const Container = styled.div`
   font-size: 1.25rem;
   font-family: "Pretendard-Regular";
 
+  padding: 0 3rem;
+  box-sizing: border-box;
+
   border-bottom: 2px solid ${S.headerStyle.thema};
+  z-index: 1;
 `;
 
 const HeaderDivider = styled.div`
-  width: max-content;
+  width: fit-content;
   height: 100%;
 
   display: flex;
@@ -91,14 +100,12 @@ const ShortLink = styled(Link)<{ location: string; to: string }>`
   }
 `;
 
-const RegisterBtn = styled.button<{ usage: string }>`
+const RegisterBtn = styled.button`
   width: 100px;
   height: 42px;
 
-  background-color: ${(props) =>
-    props.usage === "login" ? S.headerStyle.bg : S.headerStyle.thema};
-  color: ${(props) =>
-    props.usage === "login" ? S.headerStyle.thema : S.headerStyle.bg};
+  background-color: ${S.headerStyle.thema};
+  color: ${S.headerStyle.bg};
 
   border: 0;
   border-radius: 1rem;
@@ -111,10 +118,7 @@ const RegisterBtn = styled.button<{ usage: string }>`
   transition-duration: 0.2s;
 
   &:hover {
-    background-color: ${(props) =>
-      props.usage === "login"
-        ? S.headerStyle.hoverbg1
-        : S.headerStyle.hoverbg2};
+    background-color: ${S.headerStyle.hoverbg2};
   }
 `;
 

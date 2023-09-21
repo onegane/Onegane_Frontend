@@ -17,7 +17,7 @@ const View = () => {
 export default View;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 
   padding-top: 4.5rem;
