@@ -1,37 +1,37 @@
 import styled from "styled-components";
+import { packageProps } from "./packageProps.type";
+import { usePackage } from "../../apis/usePackage";
 
-const PackageDesc = () => {
-  const datalen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const PackageDesc = ({ data }: { data: Object[] }) => {
+  const { deletePackage } = usePackage();
 
   const dataType = [
     "택배 번호",
     "상품명",
     "수령 상태",
-    "택배사",
     "도착일",
-    "수령일",
     "운송장번호",
     "삭제",
-  ].map((data) => {
-    return <div style={{ color: "#808080", fontSize: "1.125rem" }}>{data}</div>;
+  ].map((element) => {
+    return (
+      <div style={{ color: "#808080", fontSize: "1.125rem" }}>{element}</div>
+    );
   });
 
   return (
     <Container>
       {dataType}
-      {datalen.map(() => {
+      {data.map((element: any) => {
         return (
           <>
-            <Pnumber>32</Pnumber>
-            <ProductName>
-              오뚜기 진라면 라면 무제한 고르기 30*4입 120봉
-            </ProductName>
-            <CurrentState>배송중</CurrentState>
-            <Pcompany>CJ대한통운</Pcompany>
-            <Sdate>2023.03.23</Sdate>
-            <Gdate>-</Gdate>
-            <Pid>612698465196519124</Pid>
-            <Del>X</Del>
+            <Pnumber>{element.id}</Pnumber>
+            <ProductName>{element.parcelNickname}</ProductName>
+            <CurrentState>
+              {element.state === "NOT_ARRIVED" ? "배송중" : element.state}
+            </CurrentState>
+            <Sdate>{element.getDate}</Sdate>
+            <Pid>{element.trackingNumber}</Pid>
+            <Del onClick={() => deletePackage(element.id)}>X</Del>
           </>
         );
       })}
@@ -48,8 +48,8 @@ const Container = styled.div`
   position: relative;
 
   display: grid;
-  grid-template-columns: repeat(8, minmax(3.075rem, max-content));
-  grid-gap: 2rem;
+  grid-template-columns: repeat(6, minmax(3.075rem, max-content));
+  grid-gap: 3rem;
 
   font-size: 1rem;
   font-family: "pretendard";
@@ -79,8 +79,6 @@ const Pnumber = styled.div``;
 
 const ProductName = styled.div``;
 
-const Pcompany = styled.div``;
-
 const CurrentState = styled.div``;
 
 const Sdate = styled.div`
@@ -95,6 +93,6 @@ const Pid = styled.div`
   color: #5c5c5c;
 `;
 
-const Approv = styled.div``;
-
-const Del = styled.div``;
+const Del = styled.div`
+  cursor: pointer;
+`;

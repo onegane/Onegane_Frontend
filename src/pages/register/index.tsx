@@ -2,21 +2,15 @@ import styled from "styled-components";
 import * as C from "../../components/index";
 import * as S from "../../style";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { usePackage } from "../../apis/usePackage";
 
 const Register = () => {
   const [packageNumber, setPackageNumber] = useState("");
-  const submit = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    console.log(packageNumber);
-  }, [packageNumber]);
-
-  const CheckInput = (content: string, element: HTMLInputElement) => {
-    content === ""
-      ? (element.style.border = "2px solid #ff8b8b")
-      : (element.style.border = "2px solid #D2D2D2");
-  };
+  const [packageName, setPackageName] = useState("");
+  const { regiserPackage } = usePackage();
+  const name = useRef();
+  const number = useRef();
 
   return (
     <Container>
@@ -30,13 +24,24 @@ const Register = () => {
           <ShowIcon imgLink="assets/register/step3.svg" />
         </ShowRegisterProgress>
         <WriteRegisterInfo>
-          <C.BaseInput
-            ref={submit}
-            onChange={setPackageNumber}
-            placeholder="운송장 번호를 입력해주세요!"
-          />
+          <InputSection>
+            <C.BaseInput
+              onChange={setPackageNumber}
+              placeholder="운송장 번호를 입력해주세요!"
+              value={packageNumber}
+            />
+            <C.BaseInput
+              onChange={setPackageName}
+              placeholder="택배 별명을 입력해주세요!"
+              value={packageName}
+            />
+          </InputSection>
           <SubmitButton
-            onClick={() => CheckInput(packageNumber, submit.current!)}
+            onClick={() => {
+              setPackageName("");
+              setPackageNumber("");
+              regiserPackage(packageName, parseInt(packageNumber));
+            }}
           >
             택배 등록하기
           </SubmitButton>
@@ -68,7 +73,7 @@ const RegisterContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  gap: 8rem;
+  gap: 6rem;
 `;
 
 const ShowRegisterProgress = styled.div`
@@ -94,7 +99,13 @@ const WriteRegisterInfo = styled.div`
   justify-content: center;
   align-items: center;
 
-  gap: 4rem;
+  gap: 2rem;
+`;
+
+const InputSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const SubmitButton = styled.button`

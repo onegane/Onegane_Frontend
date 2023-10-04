@@ -1,7 +1,7 @@
-import SendUserCode from "../../apis/useSendUserCode";
+import { useLogin } from "../../apis/useLogin";
 
 const Redirect = () => {
-  SendUserCode();
+  useLogin();
 
   return <div></div>;
 };

@@ -1,19 +1,29 @@
-import { Dispatch, ForwardedRef, forwardRef, SetStateAction, useRef } from "react";
+import {
+  Dispatch,
+  ForwardedRef,
+  forwardRef,
+  SetStateAction,
+  useRef,
+} from "react";
 import styled from "styled-components";
 
 const Input = forwardRef(
   (
-    props: { placeholder: string; onChange: Dispatch<SetStateAction<string>> },
+    props: {
+      placeholder: string;
+      onChange: Dispatch<SetStateAction<string>>;
+      value: string;
+    },
     submit: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <BaseInput
         onChange={(e) => {
           props.onChange(e.target.value);
-          console.log("히히 값저장됨 ㅋ");
         }}
         placeholder={props.placeholder}
         ref={submit}
+        value={props.value}
       />
     );
   }
@@ -42,7 +52,7 @@ const BaseInput = styled.input`
   }
 
   &:focus {
-    transform: scale(1.05);
+    transform: scale(1.01);
     border: 2px solid #8b8b8b;
   }
 `;
