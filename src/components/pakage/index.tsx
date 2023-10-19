@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { packageProps } from "./packageProps.type";
 import { usePackage } from "../../apis/usePackage";
 
 const PackageDesc = ({ data }: { data: Object[] }) => {
@@ -18,6 +17,18 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
     );
   });
 
+  const timestamp = (시간: any) => {
+    const date = 시간.split("T")[0];
+    const time = 시간.split("T")[1];
+    console.log(time);
+    const 시각 = new Date(date + " " + time);
+    const 진짜마지막 = new Date(시각.setHours(시각.getHours() + 18))
+      .toISOString()
+      .replace("T", " ")
+      .substring(0, 19);
+    return 진짜마지막;
+  };
+
   return (
     <Container>
       {dataType}
@@ -29,7 +40,7 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
             <CurrentState>
               {element.state === "NOT_ARRIVED" ? "배송중" : element.state}
             </CurrentState>
-            <Sdate>{element.getDate}</Sdate>
+            <Sdate>{timestamp(element.getDate)}</Sdate>
             <Pid>{element.trackingNumber}</Pid>
             <Del onClick={() => deletePackage(element.id)}>X</Del>
           </>
