@@ -1,21 +1,17 @@
 import instance from "./instance";
 import authorization from "./authorization";
-import { useNavigate } from "react-router-dom";
-
 export const usePackage = () => {
-  const navigate = useNavigate();
-
   const regiserPackage = async (packname: string, packnumber: number) => {
     try {
       const postdata = await instance.post(
-        "http://api.onegane.kro.kr/api/number",
+        "/number",
         {
           trackingNumber: packnumber,
           parcelNickname: packname,
         },
         authorization()
       );
-      console.log(postdata);
+      alert("택배가 등록되었습니다.");
       return postdata;
     } catch (e) {
       console.log(e);
@@ -25,7 +21,7 @@ export const usePackage = () => {
   const deletePackage = async (id: number) => {
     try {
       const deletedata = await instance.delete(
-        `http://api.onegane.kro.kr/api/number/${id}`,
+        `/number/${id}`,
         authorization()
       );
       console.log("삭제 완료!");

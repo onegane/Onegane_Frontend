@@ -11,19 +11,14 @@ export const useLogin = async () => {
 
   if (userCode) {
     try {
-      const response = instance.post(
-        `http://api.onegane.kro.kr/api/auth/bsm?code=${userCode}`
-      );
+      const response = instance.post(`/auth/bsm?code=${userCode}`);
       const token = await response;
       console.log(token);
 
       localStorage.setItem("accessToken", token.data.accessToken);
       localStorage.setItem("refreshToken", token.data.refreshToken);
 
-      const resdata = await instance.get(
-        "http://api.onegane.kro.kr/api/auth",
-        authorization()
-      );
+      const resdata = await instance.get("/auth", authorization());
       const userdata = resdata;
       setUserData(userdata);
 

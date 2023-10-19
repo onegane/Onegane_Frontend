@@ -10,13 +10,9 @@ export const useLogout = () => {
 
   const logout = () => {
     try {
-      instance.delete(
-        "http://api.onegane.kro.kr/api/auth/logout",
-        authorization()
-      );
+      instance.delete("/auth/logout", authorization());
       localStorage.clear();
       setUserData(null);
-      console.log("ㅅㅂ");
     } catch (e) {
       console.log(e);
       navigate("/error");
