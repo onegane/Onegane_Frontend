@@ -1,8 +1,9 @@
 import axios from "axios";
 import authorization from "./authorization";
+import { Base_URL } from "../constants";
 
 const instance = axios.create({
-  baseURL: process.env.BaseURL,
+  baseURL: Base_URL,
 });
 
 instance.interceptors.response.use(
@@ -14,7 +15,7 @@ instance.interceptors.response.use(
     if (err.response) {
       try {
         const newAccessToken = await instance.put(
-          "http://api.onegane.kro.kr/api/auth/refresh",
+          "/auth/refresh",
           authorization()
         );
 
