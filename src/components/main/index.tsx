@@ -5,7 +5,7 @@ const Main = () => {
   return (
     <Container>
       <OneLineDesc>오네가네,</OneLineDesc>
-      <OneLineDesc>당신의 택배를 편안하고 안전하게</OneLineDesc>
+      <OneLineDesc>당신의 택배를 안전하고 편리하게</OneLineDesc>
     </Container>
   );
 };
@@ -23,8 +23,6 @@ const Container = styled.div`
 `;
 
 const OneLineDesc = styled.div`
-  width: 0;
-
   white-space: nowrap;
 
   font-size: 4rem;
@@ -34,6 +32,7 @@ const OneLineDesc = styled.div`
   margin-bottom: 20px;
 
   color: ${S.headerStyle.text3};
+  opacity: 0.8;
   overflow: hidden;
 `;
 
