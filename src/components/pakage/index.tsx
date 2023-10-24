@@ -32,13 +32,15 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
   return (
     <Container>
       {dataType}
-      {data.map((element: any) => {
+      {data.map((element: any, i) => {
         return (
           <>
             <Pnumber>{element.id}</Pnumber>
             <ProductName>{element.parcelNickname}</ProductName>
             <CurrentState>
-              {element.state === "NOT_ARRIVED" ? "배송중" : element.state}
+              {element.state === "NOT_ARRIVED"
+                ? "배송중"
+                : element.state.replace("STATE_", "") + " 번 사물함"}
             </CurrentState>
             <Sdate>{timestamp(element.getDate)}</Sdate>
             <Pid>{element.trackingNumber}</Pid>
@@ -106,4 +108,8 @@ const Pid = styled.div`
 
 const Del = styled.div`
   cursor: pointer;
+`;
+
+const PackageRow = styled.div<{ number: number }>`
+  background-color: ${({ number }) => (number % 2 === 0 ? "white" : "#D2D2D2")};
 `;
