@@ -2,8 +2,10 @@ import * as C from "../../components/index";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useGetList } from "../../apis/useGetList";
+import { useNavigate } from "react-router-dom";
 
 const View = () => {
+  const router = useNavigate();
   const { getList } = useGetList();
   const [listdata, setListdata] = useState<Object[]>([]);
 
@@ -13,6 +15,13 @@ const View = () => {
       setListdata(data);
       console.log(listdata);
     });
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      alert("로그인이 필요한 기능입니다.");
+      router("/");
+    }
   }, []);
 
   return (

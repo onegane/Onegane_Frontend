@@ -2,15 +2,24 @@ import styled from "styled-components";
 import * as C from "../../components/index";
 import * as S from "../../style";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePackage } from "../../apis/usePackage";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const router = useNavigate();
   const [packageNumber, setPackageNumber] = useState("");
   const [packageName, setPackageName] = useState("");
   const { regiserPackage } = usePackage();
   const name = useRef();
   const number = useRef();
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      alert("로그인이 필요한 기능입니다.");
+      router("/");
+    }
+  }, []);
 
   return (
     <Container>
