@@ -6,28 +6,28 @@ const instance = axios.create({
   baseURL: Base_URL,
 });
 
-instance.interceptors.response.use(
-  function (response) {
-    return response;
-  },
+// instance.interceptors.response.use(
+//   function (response) {
+//     return response;
+//   },
 
-  async function (err) {
-    if (err.response) {
-      try {
-        const newAccessToken = await instance.put(
-          "/auth/refresh",
-          authorization()
-        );
+//   async function (err) {
+//     if (err.response) {
+//       try {
+//         const newAccessToken = await instance.put(
+//           "/auth/refresh",
+//           authorization()
+//         );
 
-        localStorage.removeItem("accessToken");
-        localStorage.setItem("accessToken", newAccessToken.data);
-      } catch (e) {
-        console.log(e);
-        alert("다시 로그인해 주세요.");
-        window.location.href = "/";
-      }
-    }
-  }
-);
+//         localStorage.removeItem("accessToken");
+//         localStorage.setItem("accessToken", newAccessToken.data);
+//       } catch (e) {
+//         console.log(e);
+//         alert("다시 로그인해 주세요.");
+//         window.location.href = "/";
+//       }
+//     }
+//   }
+// );
 
 export default instance;

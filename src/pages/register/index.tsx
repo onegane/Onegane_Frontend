@@ -11,8 +11,6 @@ const Register = () => {
   const [packageNumber, setPackageNumber] = useState("");
   const [packageName, setPackageName] = useState("");
   const { regiserPackage } = usePackage();
-  const name = useRef();
-  const number = useRef();
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
@@ -49,7 +47,7 @@ const Register = () => {
             onClick={() => {
               setPackageName("");
               setPackageNumber("");
-              regiserPackage(packageName, parseInt(packageNumber));
+              regiserPackage(packageName, packageNumber);
             }}
           >
             택배 등록하기
