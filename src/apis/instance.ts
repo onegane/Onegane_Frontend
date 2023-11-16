@@ -1,5 +1,4 @@
 import axios from "axios";
-import authorization from "./authorization";
 import { Base_URL } from "../constants";
 
 const instance = axios.create({
@@ -12,7 +11,7 @@ instance.interceptors.response.use(
   },
 
   async function (err) {
-    if (err.response) {
+    if (err.response.status === 403) {
       try {
         localStorage.clear();
         alert("다시 로그인해 주세요.");
