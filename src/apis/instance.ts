@@ -15,8 +15,9 @@ instance.interceptors.response.use(
     if (err.response) {
       try {
         localStorage.clear();
-        window.location.href = "/";
         alert("다시 로그인해 주세요.");
+        window.location.href = "/";
+        window.location.reload();
       } catch (e) {
         console.log(e);
       }
