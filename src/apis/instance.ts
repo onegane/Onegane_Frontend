@@ -14,7 +14,7 @@ instance.interceptors.response.use(
   async function (err) {
     if (err.response) {
       try {
-        localStorage.removeItem("accessToken");
+        localStorage.clear();
         window.location.href = "/";
         alert("다시 로그인해 주세요.");
       } catch (e) {
