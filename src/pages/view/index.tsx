@@ -10,6 +10,13 @@ const View = () => {
   const [listdata, setListdata] = useState<Object[]>([]);
 
   useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      router("/");
+      alert("로그인이 필요한 기능입니다.");
+
+      return;
+    }
+
     const promise = getList();
     promise.then((data) => {
       setListdata(data);
@@ -17,17 +24,10 @@ const View = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (!localStorage.getItem("accessToken")) {
-      alert("로그인이 필요한 기능입니다.");
-      router("/");
-    }
-  }, []);
-
   return (
     <>
       <Container>
-        <C.Title title="택배 조회" />
+        <C.Title title="등록된 택배 조회" />
         <SubContainer>
           <C.PakageDesc data={listdata} />
         </SubContainer>

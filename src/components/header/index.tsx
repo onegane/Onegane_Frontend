@@ -39,7 +39,16 @@ const Header = () => {
               setIsProfileClicked(!isProfileClicked);
             }}
           >
-            {userData.data.name}
+            {userData.data.name}{" "}
+            {isProfileClicked ? (
+              <span
+                style={{ fontSize: "0.7rem", transform: "rotateX(180deg)" }}
+              >
+                ▼
+              </span>
+            ) : (
+              <span style={{ fontSize: "0.7rem" }}>▼</span>
+            )}
             {isProfileClicked && (
               <LogoutButton onClick={() => logout()}>로그아웃</LogoutButton>
             )}
@@ -66,7 +75,7 @@ const Container = styled.div`
   font-size: 1.25rem;
   font-family: "Pretendard-Regular";
 
-  padding: 0 3rem;
+  padding: 0 4rem;
   box-sizing: border-box;
 
   border-bottom: 2px solid ${S.headerStyle.thema};
@@ -141,6 +150,11 @@ const UserName = styled.div`
   position: relative;
   cursor: pointer;
 
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
   font-size: 1.1rem;
   font-weight: 500;
   padding: 5px;
@@ -150,12 +164,13 @@ const UserName = styled.div`
 
 const LogoutButton = styled.div`
   position: absolute;
-  bottom: -2.75rem;
-  left: 0;
-  width: 8rem;
-  height: fit-content;
+  width: 3.9rem;
+  bottom: -2rem;
+  left: -0.15rem;
   background-color: ${S.headerStyle.bg};
   color: ${S.headerStyle.text2};
+
+  box-shadow: 0px 0px 5px #d2d2d2;
 
   border-radius: 5px;
   padding: 5px;

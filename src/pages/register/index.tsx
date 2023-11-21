@@ -14,8 +14,8 @@ const Register = () => {
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      alert("로그인이 필요한 기능입니다.");
       router("/");
+      alert("로그인이 필요한 기능입니다.");
     }
   }, []);
 

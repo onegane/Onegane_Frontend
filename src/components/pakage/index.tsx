@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { usePackage } from "../../apis/usePackage";
+import { headerStyle } from "../../style";
 
 const PackageDesc = ({ data }: { data: Object[] }) => {
   const { deletePackage } = usePackage();
@@ -10,10 +11,12 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
     "수령 상태",
     "도착일",
     "운송장번호",
-    "삭제",
+    "-",
   ].map((element) => {
     return (
-      <div style={{ color: "#808080", fontSize: "1.125rem" }}>{element}</div>
+      <PackageAttribute style={{ color: "#6d6d6d", fontSize: "1.125rem" }}>
+        {element}
+      </PackageAttribute>
     );
   });
 
@@ -44,7 +47,7 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
             </CurrentState>
             <Sdate>{timestamp(element.getDate)}</Sdate>
             <Pid>{element.trackingNumber}</Pid>
-            <Del onClick={() => deletePackage(element.id)}>X</Del>
+            <Del onClick={() => deletePackage(element.id)}>삭제</Del>
           </>
         );
       })}
@@ -62,7 +65,7 @@ const Container = styled.div`
 
   display: grid;
   grid-template-columns: repeat(6, minmax(3.075rem, max-content));
-  grid-gap: 3rem;
+  grid-row-gap: 3rem;
 
   font-size: 1rem;
   font-family: "pretendard";
@@ -90,15 +93,13 @@ const Container = styled.div`
 
 const Pnumber = styled.div``;
 
-const ProductName = styled.div``;
+const ProductName = styled.div`
+  width: 150px;
+`;
 
 const CurrentState = styled.div``;
 
 const Sdate = styled.div`
-  color: #5c5c5c;
-`;
-
-const Gdate = styled.div`
   color: #5c5c5c;
 `;
 
@@ -107,9 +108,14 @@ const Pid = styled.div`
 `;
 
 const Del = styled.div`
+  color: red;
   cursor: pointer;
 `;
 
 const PackageRow = styled.div<{ number: number }>`
   background-color: ${({ number }) => (number % 2 === 0 ? "white" : "#D2D2D2")};
+`;
+
+const PackageAttribute = styled.div`
+  width: 150px;
 `;

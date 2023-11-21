@@ -13,6 +13,7 @@ export const useLogout = () => {
       instance.delete("/auth/logout", authorization());
       localStorage.clear();
       setUserData(null);
+      navigate("/");
     } catch (e) {
       console.log(e);
       navigate("/error");
