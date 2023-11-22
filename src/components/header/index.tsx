@@ -29,8 +29,8 @@ const Header = () => {
       </HeaderDivider>
       <HeaderDivider>
         {!userData ? (
-          //"https://auth.bssm.kro.kr/oauth?clientId=d674a77d&redirectURI=https://onegane.kro.kr/redirect"
-          <a href="https://auth.bssm.kro.kr/oauth?clientId=d674a77d&redirectURI=http://localhost:3000/redirect">
+          //https://auth.bssm.kro.kr/oauth?clientId=d674a77d&redirectURI=http://localhost:3000/redirect
+          <a href="https://auth.bssm.kro.kr/oauth?clientId=d674a77d&redirectURI=https://onegane.kro.kr/redirect">
             <RegisterBtn>로그인</RegisterBtn>
           </a>
         ) : (
