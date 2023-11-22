@@ -9,7 +9,7 @@ const PackageDesc = ({ data }: { data: Object[] }) => {
     "택배 번호",
     "상품명",
     "수령 상태",
-    "도착일",
+    "등록 시간",
     "운송장번호",
     "-",
   ].map((element) => {
